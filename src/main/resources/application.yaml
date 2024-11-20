@@ -5,6 +5,11 @@ file:
 mybatis:
   mapper-locations: xml/**/*.xml
 
+# Base URL setting
+server:
+  servlet:
+    context-path: /api
+
 spring:
   application:
     name: GreenGramVer1
