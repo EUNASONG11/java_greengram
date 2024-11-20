@@ -1,3 +1,7 @@
+#custom property(절대 경로 Absolute Path)
+file:
+  directory: D:/SEA/download/greengram_ver1
+
 mybatis:
   mapper-locations: xml/**/*.xml
 
@@ -10,9 +14,15 @@ spring:
     username: root
     password: green502
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
 springdoc:
   swagger-ui:
     default-model-expand-depth: 10
     display-request-duration: true
     operations-sorter: method
     path: /swagger
+  cache:
+    disabled: true

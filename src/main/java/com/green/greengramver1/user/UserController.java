@@ -6,10 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RestController
@@ -19,10 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService service;
 
+    /*
+        파일(MultipartFile) + Data
+        파일 업로드시에는 @RequestBody를 사용할 수 없다.
+        @RequestPart애노테이션을 사용해야 한다.
+     */
+
     @PostMapping("sign-up")
     @Operation(summary = "회원가입")
-    public ResultResponse<Integer> signUp(@RequestBody UserInsReq p) {
-        int result = 0;
+    public ResultResponse<Integer> signUp(@RequestPart UserInsReq p, @RequestPart MultipartFile pic) {
+        log.info("UserInsReq: {}, file: {}", p, pic.getOriginalFilename());
+        int result = service.postSignUp(pic, p);
         return ResultResponse.<Integer>builder().resultMessage("회원가입 완료").resultData(result).build();
     }
 }
