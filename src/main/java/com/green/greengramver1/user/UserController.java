@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("user")
-@Tag(name="유저", description = "회원가입, 로그인 처리")
+@Tag(name="1. 유저", description = "회원가입, 로그인 처리")
 public class UserController {
     private final UserService service;
 
