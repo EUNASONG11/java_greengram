@@ -9,4 +9,16 @@
              , contents = #{contents}
              , location = #{location}
     </insert>
+
+
+
+
+
+
+
+    <insert id="insFeedPic">
+        INSERT INTO feed_pics
+           SET feed_id = #{feedId}
+             , pic = #{pic}
+    </insert>
 </mapper>
