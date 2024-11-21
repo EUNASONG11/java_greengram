@@ -34,8 +34,10 @@ public class UserService {
             return result;
         }
 
+        // 저장 위치 만드는 것
+        // middlePath = user/${userId}
+        // filePath = user/${userId}/${savedPicName}
         long userId = p.getUserId(); //userId를 insert 후에 얻을 수 있는 값
-        // user/${userId}/${savedPicName}
         String middlePath = String.format("user/%d", userId);
         myFileUtils.makeFolders(middlePath);
         log.info("middlePath: {}", middlePath);

@@ -23,6 +23,7 @@ public class UserController {
         @RequestPart애노테이션을 사용해야 한다.
      */
 
+    //pic != null ? pic.getOriginalFilename() : null >> null일 경우 에러가 터지기 때문에 null이 아니었을 때만 메소드 호출
     @PostMapping("sign-up")
     @Operation(summary = "회원가입")
     public ResultResponse<Integer> signUp(@RequestPart UserInsReq p, @RequestPart(required = false) MultipartFile pic) {
