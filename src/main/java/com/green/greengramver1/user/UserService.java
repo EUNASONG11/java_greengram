@@ -1,10 +1,11 @@
 package com.green.greengramver1.user;
 
 import com.green.greengramver1.common.MyFileUtils;
-import com.green.greengramver1.user.model.UserInsReq;
+import com.green.greengramver1.user.model.UserSignInReq;
+import com.green.greengramver1.user.model.UserSignInRes;
+import com.green.greengramver1.user.model.UserSignUpReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,7 @@ public class UserService {
     private final UserMapper mapper;
     private final MyFileUtils myFileUtils;
 
-    public int postSignUp(MultipartFile pic, UserInsReq p) {
+    public int postSignUp(MultipartFile pic, UserSignUpReq p) {
         //프로필 이미지 파일 처리
         //String savedPicName = myFileUtils.makeRandomFileName(pic.getOriginalFilename());
         String savedPicName = pic != null ? myFileUtils.makeRandomFileName(pic) : null;
@@ -50,5 +51,20 @@ public class UserService {
         }
 
         return result;
+    }
+
+    public UserSignInRes postSignIn(UserSignInReq req) {
+        UserSignInRes res = mapper.selUserForSignIn(req);
+        if(res == null) { //아이디 없음
+            res = new UserSignInRes();
+            res.setMessage("아이디를 확인해 주세요.");
+            return res;
+        } else if (!BCrypt.checkpw(req.getUpw(), res.getUpw())) { //비밀번호가 다를 시
+            res = new UserSignInRes();
+            res.setMessage("비밀번호를 확인해 주세요.");
+            return res;
+        }
+        res.setMessage("로그인 성공");
+        return res;
     }
 }
