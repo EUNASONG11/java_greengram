@@ -22,7 +22,7 @@ public class UserController {
     /*
         파일(MultipartFile) + Data
         파일 업로드시에는 @RequestBody를 사용할 수 없다.
-        @RequestPart애노테이션을 사용해야 한다.
+        @RequestPart애노테이션을 사용해야 한다.  (required = true)가 기본값 >> true이면 필수적으로 값이 들어와야 함
      */
 
     //pic != null ? pic.getOriginalFilename() : null >> null일 경우 에러가 터지기 때문에 null이 아니었을 때만 메소드 호출
@@ -39,7 +39,7 @@ public class UserController {
 
     @PostMapping("sign-in")
     @Operation(summary = "로그인")
-    public ResultResponse<UserSignInRes> signIn(@RequestBody UserSignInReq p) {
+    public ResultResponse<UserSignInRes> signIn(@RequestBody UserSignInReq p) { //@RequestBody 에서는 UserSignInReq 타입의 p 파라미터가 아니라 UserSignInReq 안의 멤버필드명이 중요
         UserSignInRes res = service.postSignIn(p);
         return ResultResponse.<UserSignInRes>builder()
                 .resultMessage(res.getMessage())
