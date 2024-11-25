@@ -22,7 +22,7 @@
     </select>
 
 
-
+<!-- ///////feed_pics////////-->
 
 
     <insert id="insFeedPic">
@@ -30,4 +30,10 @@
            SET feed_id = #{feedId}
              , pic = #{pic}
     </insert>
+
+    <select id="selFeedPicList">
+        SELECT pic
+          FROM feed_pics
+         WHERE feed_id = #{feedId}
+    </select>
 </mapper>

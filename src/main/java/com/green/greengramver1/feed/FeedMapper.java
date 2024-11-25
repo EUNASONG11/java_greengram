@@ -13,6 +13,8 @@ import java.util.List;
 public interface FeedMapper {
     int insFeed(FeedPostReq p);
     List<FeedGetRes> selFeedList(FeedGetReq p);
+
     int insFeedPic(FeedPicDto feedPicDto);
+    List<String> selFeedPicList(long p);
 
 }

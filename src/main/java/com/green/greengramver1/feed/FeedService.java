@@ -55,6 +55,12 @@ public class FeedService {
     public List<FeedGetRes> getFeedList(FeedGetReq p) {
         List<FeedGetRes> list = mapper.selFeedList(p);
 
+        //사진 매핑
+        for (FeedGetRes res : list) {
+            List<String> pics = mapper.selFeedPicList(res.getFeedId());
+            res.setPics(pics);
+        }
+
         return list;
     }
 }
