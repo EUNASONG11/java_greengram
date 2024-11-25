@@ -17,7 +17,7 @@ public class Paging {
 
     public Paging(int page, int size) {
         this.page = page;
-        this.size = size;
+        this.size = (size == 0 ? 20 : size);
         this.startIdx = (page - 1) * size;
     }
 }

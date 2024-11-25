@@ -6,5 +6,4 @@ public class FeedGetReq extends Paging {
     public FeedGetReq(int page, int size) {
         super(page, size);
     }
-
 }
