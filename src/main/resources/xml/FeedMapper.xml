@@ -10,7 +10,16 @@
              , location = #{location}
     </insert>
 
-
+    <select id="selFeedList">
+        SELECT A.feed_id AS feedId, A.contents, A.location, A.created_at AS createdAt
+               , B.user_id AS writerId, B.pic AS writerPic
+               , if(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+          FROM feed A
+         INNER JOIN user B
+            ON A.writer_user_id = B.user_id
+         ORDER BY feed_id DESC
+         LIMIT #{startIdx}, #{size}
+    </select>
 
 
 

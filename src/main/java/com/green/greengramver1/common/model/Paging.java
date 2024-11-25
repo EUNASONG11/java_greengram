@@ -14,4 +14,10 @@ public class Paging {
     private int size;
     @JsonIgnore
     private int startIdx;
+
+    public Paging(int page, int size) {
+        this.page = page;
+        this.size = size;
+        this.startIdx = (page - 1) * size;
+    }
 }
