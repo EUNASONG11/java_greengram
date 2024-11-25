@@ -2,6 +2,7 @@ package com.green.greengramver1.feed;
 
 import com.green.greengramver1.common.model.ResultResponse;
 import com.green.greengramver1.feed.model.FeedGetReq;
+import com.green.greengramver1.feed.model.FeedGetRes;
 import com.green.greengramver1.feed.model.FeedPostReq;
 import com.green.greengramver1.feed.model.FeedPostRes;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,11 +35,12 @@ public class FeedController {
     QueryString - URL(주소값)에 KEY, VALUE값을 포함한다.
      */
     @GetMapping
-    public ResultResponse<Integer> getFeedList(@ParameterObject @ModelAttribute FeedGetReq p) {
+    public ResultResponse<List<FeedGetRes>> getFeedList(@ParameterObject @ModelAttribute FeedGetReq p) {
         log.info("p: {}", p);
-        return ResultResponse.<Integer>builder()
-                .resultMessage("테스트")
-                .resultData(1)
+        List<FeedGetRes> list = service.getFeedList(p);
+        return ResultResponse.<List<FeedGetRes>>builder()
+                .resultMessage(String.format("%d rows", list.size()))
+                .resultData(list)
                 .build();
     }
 }
