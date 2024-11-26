@@ -60,7 +60,7 @@ public class FeedService {
             List<String> pics = mapper.selFeedPicList(res.getFeedId());
             res.setPics(pics);
         }
-
+        //N+1 이슈(SELECT)
         return list;
     }
 }
